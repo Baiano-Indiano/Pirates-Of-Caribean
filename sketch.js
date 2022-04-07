@@ -56,3 +56,12 @@ function draw() {
  cannonProp.show();
    
 }
+
+ function keyReleased(){
+
+  if(keyCode === DOWN_ARROW){
+    cannonProp.Fire();
+
+  }
+
+ }

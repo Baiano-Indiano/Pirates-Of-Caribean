@@ -11,10 +11,17 @@ class CannonProp {
 
     show(){
         var pos = this.corpo.position;
-
         push();
         imageMode(CENTER);
         image(this.imagem, pos.x, pos.y, this.raio, this.raio);
         pop();
     }
+
+Fire(){
+
+Matter.Body.setStatic(this.corpo, false);
+Matter.Body.setVelocity(this.corpo,{x:30,y:-20})
+
 }
+
+    }
