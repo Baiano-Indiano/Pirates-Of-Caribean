@@ -4,11 +4,20 @@ class Torment {
         this.y = posY;
         this.l = lar;
         this.a = alt;
-        this.an = ang;
+        this.ang = ang;
         this.cannon = loadImage("./assets/canon.png");
         this.base = loadImage("./assets/cannonBase.png");
     }
     show(){
+
+        if(keyIsDown(RIGHT_ARROW)){
+            this.ang += 1;
+        }
+
+        if(keyIsDown(LEFT_ARROW)){
+            this.ang -= 1;
+        }
+
         push();
 
             imageMode(CENTER);

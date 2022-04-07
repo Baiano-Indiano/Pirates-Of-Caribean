@@ -6,7 +6,8 @@ const Constraint = Matter.Constraint;
 var engine, world, ground, options;
 var paisagem;
 var tower, gibraltar;
-var blaster, Angle;
+var blaster, ang;
+var cannonProp;
 
 
 function preload() {
@@ -30,9 +31,12 @@ function setup() {
  tower = Bodies.rectangle(160,350,160,310,options);
  World.add(world,tower);
 
- Angle = 20
+ angleMode(DEGREES)
+ ang = 20
 
- blaster = new Torment(180,110,130,100,Angle);
+ blaster = new Torment(180,110,130,100,ang);
+
+ cannonProp = new CannonProp(blaster.x, blaster.y);
  
 }
 
@@ -48,5 +52,7 @@ function draw() {
  imageMode(CENTER);
  image(gibraltar, tower.position.x, tower.position.y, 160, 310);
  pop(); 
+
+ cannonProp.show();
    
 }
