@@ -2,6 +2,7 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
+var Municao = []
 
 var engine, world, ground, options;
 var paisagem;
@@ -36,7 +37,7 @@ function setup() {
 
  blaster = new Torment(180,110,130,100,ang);
 
- cannonProp = new CannonProp(blaster.x, blaster.y);
+ 
  
 }
 
@@ -53,15 +54,51 @@ function draw() {
  image(gibraltar, tower.position.x, tower.position.y, 160, 310);
  pop(); 
 
- cannonProp.show();
+ for(var i = 0; i < Municao.length; i ++){
+
+  hud(Municao[i],i);
+ }
    
 }
 
  function keyReleased(){
 
   if(keyCode === DOWN_ARROW){
-    cannonProp.Fire();
-
+    Municao[Municao.length - 1].Fire();
+    
   }
 
  }
+
+ function keyPressed(){
+
+  if(keyCode === DOWN_ARROW){
+    var cannonProp = new CannonProp(blaster.x, blaster.y);
+    Municao.push(cannonProp);
+  }
+
+ }
+
+ function hud(cannonProp,i){
+
+ if(cannonProp){
+  cannonProp.show();
+ }
+
+ }
+
+ //Revisão de matrizes
+ var matriz1 = [25,32,1,49,86];
+ //console.log(matriz1);
+
+ var matriz2 = [26, "Bernardo", true];
+ //console.log(matriz2[2]);
+
+ var matriz3 = [matriz1, matriz2];
+ //console.log(matriz3[0][4]);
+
+ matriz1.push(5);
+ //console.log(matriz1);
+
+ matriz1.pop();
+ //console.log(matriz1);
