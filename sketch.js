@@ -9,6 +9,9 @@ var paisagem;
 var tower, gibraltar;
 var blaster, ang;
 var cannonProp;
+var ship;
+
+var estaleiro = []
 
 
 function preload() {
@@ -58,6 +61,8 @@ function draw() {
 
   hud(Municao[i],i);
  }
+
+ showShips();
    
 }
 
@@ -87,6 +92,34 @@ function draw() {
 
  }
 
+ function showShips(){
+
+  if(estaleiro.length > 0){
+
+    if(estaleiro[estaleiro.length - 1] === undefined ||
+       estaleiro[estaleiro.length - 1].corpo.position.x < width - 300){
+
+      var positions = [-40,-60,-70,-20];
+      var position = random(positions);
+      var ship = new Ship(width,height - 100, 170, 170, position)
+      estaleiro.push(ship);
+    }
+
+    for(var i = 0; i < estaleiro.length; i ++){
+
+      if(estaleiro[i]){
+
+        Matter.Body.setVelocity(estaleiro[i].corpo, {x: -0.9, y: 0});
+        estaleiro[i].show();
+    }
+   }
+  } else{
+
+  var ship = new Ship(width-79, height-60, 170, 170, -80);
+  estaleiro.push(ship);
+  }
+
+ }
  //Revisão de matrizes
  var matriz1 = [25,32,1,49,86];
  //console.log(matriz1);
