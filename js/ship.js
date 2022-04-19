@@ -19,4 +19,13 @@ class Ship {
         image(this.imagem, 0, this.shipPos, this.lar, this.alt);
         pop();
     }
+    caifora(index){
+        
+    setTimeout(()=>{
+    
+    Matter.World.remove(world, estaleiro[index].corpo);
+    delete estaleiro[index];
+    },2000);
+    
+    }
 }

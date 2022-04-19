@@ -60,6 +60,7 @@ function draw() {
  for(var i = 0; i < Municao.length; i ++){
 
   hud(Municao[i],i);
+  verifyScan(i);
  }
 
  showShips();
@@ -88,6 +89,10 @@ function draw() {
 
  if(cannonProp){
   cannonProp.show();
+  if(cannonProp.corpo.position.x >= width || cannonProp.corpo.position.y >= height  -50){
+
+    cannonProp.caifora(i);
+  }
  }
 
  }
@@ -120,6 +125,25 @@ function draw() {
   }
 
  }
+
+
+function verifyScan(index){
+
+  for(var i = 0; i < estaleiro.length; i ++){
+
+   if(Municao[index] !== undefined && estaleiro[i] !== undefined){
+    var bateu = Matter.SAT.collides(Municao[index].corpo, estaleiro[i].corpo);
+    if(bateu.collided){
+
+      estaleiro[i].caifora(i);
+      Matter.World.remove(world, Municao[index].corpo);
+      delete Municao[index];
+    }
+   }
+  }
+
+
+}
  //Revisão de matrizes
  var matriz1 = [25,32,1,49,86];
  //console.log(matriz1);
