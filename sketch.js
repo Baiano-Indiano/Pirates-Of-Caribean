@@ -13,10 +13,27 @@ var ship;
 
 var estaleiro = []
 
+var shipDeathAnimation = []
+var shipSpriteDeathData, shipSpriteDeathsheet;
+
+var shipAnimation = [];
+var shipSpritedata, shipSpritesheet;
+
+var cannonballAnimation = []
+var cannonballdata, cannonballsheet;
 
 function preload() {
   paisagem = loadImage("./assets/background.gif");
   gibraltar = loadImage("./assets/tower.png");
+  shipSpritedata = loadJSON("./assets/boat/boat.json");
+  shipSpritesheet = loadImage("./assets/boat/boat.png");
+
+  shipSpriteDeathData = loadJSON("./assets/boat/brokenBoat.json");
+  shipSpriteDeathsheet = loadImage("./assets/boat/brokenBoat.png");
+
+  cannonballdata = loadJSON("./assets/waterSplash/waterSplash.json");
+  cannonballsheet = loadImage("./assets/waterSplash/waterSplash.png");
+  
 }
 
 function setup() {
@@ -40,8 +57,33 @@ function setup() {
 
  blaster = new Torment(180,110,130,100,ang);
 
+ var shipFrames = shipSpritedata.frames;
+
+ for(var i = 0; i < shipFrames.length; i++){
+   var pos = shipFrames[i].position;
+   var img = shipSpritesheet.get(pos.x, pos.y, pos.w, pos.h);
+   shipAnimation.push(img);
+ }
  
- 
+ var deathFrames = shipSpriteDeathData.frames;
+
+ for(var i = 0; i < deathFrames.length; i ++){
+
+  var pos = deathFrames[i].position;
+  var img = shipSpriteDeathsheet.get(pos.x, pos.y, pos.w, pos.h);
+  shipDeathAnimation.push(img);
+
+ }
+
+ var ballframes = cannonballdata.frames;
+
+ for(var i = 0; i < ballframes.length; i ++){
+
+  var pos = ballframes[i].position;
+  var img = cannonballsheet.get(pos.x, pos.y, pos.w, pos.h);
+  cannonballAnimation.push(img);
+
+ }
 }
 
 function draw() {
@@ -89,6 +131,7 @@ function draw() {
 
  if(cannonProp){
   cannonProp.show();
+  cannonProp.animate();
   if(cannonProp.corpo.position.x >= width || cannonProp.corpo.position.y >= height  -50){
 
     cannonProp.caifora(i);
@@ -106,7 +149,7 @@ function draw() {
 
       var positions = [-40,-60,-70,-20];
       var position = random(positions);
-      var ship = new Ship(width,height - 100, 170, 170, position)
+      var ship = new Ship(width,height - 100, 170, 170, position, shipAnimation);
       estaleiro.push(ship);
     }
 
@@ -116,11 +159,12 @@ function draw() {
 
         Matter.Body.setVelocity(estaleiro[i].corpo, {x: -0.9, y: 0});
         estaleiro[i].show();
+        estaleiro[i].animate();
     }
    }
   } else{
 
-  var ship = new Ship(width-79, height-60, 170, 170, -80);
+  var ship = new Ship(width-79, height-60, 170, 170, -80, shipAnimation);
   estaleiro.push(ship);
   }
 
