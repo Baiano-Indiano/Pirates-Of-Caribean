@@ -46,7 +46,7 @@ function preload() {
   musicTheme = loadSound("./assets/background_music.mp3");
   cannonSound = loadSound("./assets/cannon_explosion.mp3");
   ARGH = loadSound("./assets/pirate_laugh.mp3");
-  splash = loadSound("/assets/cannon_water.mp3");
+  splash = loadSound("./assets/cannon_water.mp3");
 }
 
 function setup() {
